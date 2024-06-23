@@ -237,14 +237,14 @@ def newton(funcion, funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alp
     
 
 
-# max_iterations = 100
-# x = [0.0,0.0]
-# deltaX = 0.01
+max_iterations = 100
+x = [0.0,0.0]
+deltaX = 0.01
 
-# epsilon1 = 0.001
-# epsilon2 = 0.001
-# k = 0
-# alpha = 0.2
+epsilon1 = 0.001
+epsilon2 = 0.001
+k = 0
+alpha = 0.2
 
 
 # punto_final = (newton(busquedaDorada, funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha))

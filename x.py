@@ -106,43 +106,40 @@ def hessiana(uno, dos):
 
 
 
-
-
-
-
 def newton(funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha):
     terminar = False
     xk = np.array(x, dtype=float)
     k = 0
+    
     while not terminar:
-        # GRADIENTE
+        # Paso 2: Calcular el gradiente
         gradienteX = np.array(gradiente(funcion_objetivo, xk))
         gradiente_transpuesta = np.transpose(gradienteX)
 
+        # Paso 3: Verificar la condición de terminación
         if np.linalg.norm(gradienteX) < epsilon1 or k >= max_iterations:
-            terminar=True
+            terminar = True
         else:
-
-            # HESSIANA
+            # Paso 4: Calcular la hessiana
             h1 = np.array(segunda_parte(funcion_objetivo, xk))
             h2 = np.array(tercera_parte(funcion_objetivo, xk))
             hessian = hessiana(h1, h2)
             hessian = np.matrix(hessian)
-            # INVERSA
+            
+            # Paso 5: Calcular la inversa de la hessiana
             inversa = inv(hessian)
 
-            # PRODUCTO PUNTO
+            # Paso 6: Calcular el producto punto
             punto = np.dot(inversa, gradienteX).A1  # A1 convierte a array 1D
 
-            # DISTANCIA
+            # Paso 7: Calcular la distancia
             distancia = distancia_origen(gradienteX)
-            if distancia <= epsilon1:
-                terminar = True
-            elif k >= max_iterations:
+
+            # Paso 8: Verificar la segunda condición de terminación
+            if distancia <= epsilon1 or k >= max_iterations:
                 terminar = True
             else:
-                # --------------------------------------------------
-                # ----------------- PASO 4 -------------------------
+                # Paso 9: Calcular el nuevo punto x_k1 usando el método de Newton
                 def alpha_calcular(alpha):
                     return funcion_objetivo(xk - alpha * punto)
                 
@@ -150,18 +147,17 @@ def newton(funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha):
                 
                 x_k1 = xk - alpha * punto
 
-                # --------------------------------------------------
-
+                # Paso 10: Verificar la tercera condición de terminación
                 if (distancia_origen(x_k1 - xk) / (distancia_origen(xk) + 0.00001)) <= epsilon2:
                     terminar = True
                 else:
+                    # Paso 11: Actualizar k y xk para la siguiente iteración
                     k = k + 1
                     xk = x_k1
 
     return xk
-
 # Ejemplo de uso
-prueba = [3,2]
+prueba = [0,0]
 epsilon1 = 0.001
 epsilon2 = 0.001
 max_iterations = 100
