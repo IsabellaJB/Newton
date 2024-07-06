@@ -126,7 +126,7 @@ def distancia_origen(vector):
     return np.linalg.norm(vector)
 
 # ---------------------------------- MÉTODO DE NEWTON MODIFICADO ---------------------------------- 
-def newton(funcion_objetivo, x0, epsilon1=1e-6, epsilon2=1e-6, max_iterations=100, metodo_busqueda=busquedaDorada):
+def newton(funcion_objetivo, x0, metodo_busqueda, epsilon1=1e-6, epsilon2=1e-6, max_iterations=100):
     terminar = False
     xk = np.array(x0, dtype=float)
     k = 0
@@ -173,6 +173,14 @@ def newton(funcion_objetivo, x0, epsilon1=1e-6, epsilon2=1e-6, max_iterations=10
 
 
 
+def redondear(arreglo):
+    lita = []
+    for valor in arreglo:
+        v = round(valor, 2)
+        lita.append(v)
+    return(lita)
+
+
 
 
 
@@ -181,8 +189,8 @@ x0 = [2, 1]
 
 
 solucion_golden = newton(funcion_objetivo, x0, metodo_busqueda=busquedaDorada)
-print("Solución encontrada con búsqueda dorada:", solucion_golden)
+print("Solución encontrada con búsqueda dorada:", redondear(solucion_golden))
 
 
 solucion_fibonacci = newton(funcion_objetivo, x0, metodo_busqueda=fibonacci_search)
-print("Solución encontrada con búsqueda de Fibonacci:", solucion_fibonacci)
+print("Solución encontrada con búsqueda de Fibonacci:", redondear(solucion_fibonacci))
