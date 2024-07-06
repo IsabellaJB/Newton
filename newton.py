@@ -132,7 +132,6 @@ def newton(funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha):
             inversa = inv(hessian)
 
             # PRODUCTO PUNTO
-            punto = np.dot(inversa, gradienteX).A1  # A1 convierte a array 1D
 
             # DISTANCIA
             distancia = distancia_origen(gradienteX)
@@ -141,6 +140,7 @@ def newton(funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha):
             elif k >= max_iterations:
                 terminar = True
             else:
+                punto = np.dot(inversa, gradienteX)
                 # --------------------------------------------------
                 # ----------------- PASO 4 -------------------------
                 def alpha_calcular(alpha):
@@ -161,7 +161,7 @@ def newton(funcion_objetivo, x, epsilon1, epsilon2, max_iterations, alpha):
     return xk
 
 # Ejemplo de uso
-prueba = [3,2]
+prueba = [2,1]
 epsilon1 = 0.001
 epsilon2 = 0.001
 max_iterations = 100
