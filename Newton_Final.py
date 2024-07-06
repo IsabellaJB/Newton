@@ -165,9 +165,10 @@ def newton(funcion_objetivo, x0, metodo_busqueda, epsilon1=1e-6, epsilon2=1e-6, 
         # print(f"Iteración {k+1}: x = {xk}, f(x) = {funcion_objetivo(xk)}")
 
     if k < max_iterations:
-        print(f"Convergencia alcanzada en {k+1} iteraciones.")
+        # print('\n')
+        print(f"Convergencia alcanzada en {k+1} iteraciones")
     else:
-        print("El método no convergió.")
+        print("El método no convergió")
     
     return xk
 
@@ -185,12 +186,17 @@ def redondear(arreglo):
 
 
 
-x0 = [2, 1]
-
+x0 = np.array([2, 1])
 
 solucion_golden = newton(funcion_objetivo, x0, metodo_busqueda=busquedaDorada)
-print("Solución encontrada con búsqueda dorada:", redondear(solucion_golden))
+print(f"Resultado Golden: {solucion_golden}")
+print(f"Solución encontrada con búsqueda dorada: { redondear(solucion_golden)}")
 
+print('\n'*2)
 
 solucion_fibonacci = newton(funcion_objetivo, x0, metodo_busqueda=fibonacci_search)
+print(f"Resultado Fibonacci: {solucion_fibonacci}")
 print("Solución encontrada con búsqueda de Fibonacci:", redondear(solucion_fibonacci))
+
+
+
